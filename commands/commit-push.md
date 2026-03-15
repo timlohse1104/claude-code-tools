@@ -36,13 +36,41 @@ Prüfe, ob CHANGELOG.md bereits geändert wurde (`git status`). Falls **nicht**:
 
 Falls CHANGELOG.md bereits geändert wurde: Prüfe, ob die aktuellen Änderungen darin bereits vollständig abgedeckt sind. Falls nicht, ergänze fehlende Einträge.
 
-### 5. Dateien stagen
+### 5. Docs aktualisieren
+
+**Nur wenn ein `docs/`-Verzeichnis im Repository existiert** — andernfalls diesen Schritt überspringen.
+
+**Schritt 1: Betroffene Docs ermitteln**
+
+Führe `find docs -name "*.md" | sort` aus, um alle vorhandenen Doc-Dateien zu kennen. Gleiche dann die geänderten Dateien (aus `git diff --name-only`) semantisch gegen die Doc-Dateinamen ab:
+- Der Stem eines Doc-Dateinamens (z.B. `hitstar` aus `docs/features/hitstar.md`) entspricht typischerweise einem Verzeichnis- oder Modulnamen im Quellcode.
+- Eine geänderte Datei ist relevant für eine Doc, wenn ihr Pfad den Doc-Stem enthält (z.B. `src/routes/hitstar/+page.svelte` → `docs/features/hitstar.md`) oder wenn der Doc-Stem inhaltlich beschreibt, was die Datei tut (z.B. `store-hitstar.ts` → `hitstar.md`).
+- Docs unter `docs/shared/` betreffen querschnittliche Themen (z.B. Auth, i18n, Stores) — prüfe, ob geänderte Dateien eines dieser Themen berühren.
+
+**Schritt 2: Jede betroffene Doc aktualisieren**
+
+Für jede identifizierte Doc:
+1. Lese die Doc-Datei.
+2. Lese die geänderten Quelldateien aus dem Diff.
+3. Prüfe, ob Fakten in der Doc veraltet sind: API-Endpunkte, Dateinamen, Env-Variablen, Typen, Toggle-Keys, Architektur-Beschreibungen.
+4. Aktualisiere nur veraltete Abschnitte — kein komplettes Neuschreiben.
+5. Falls alles noch stimmt: keine Änderung.
+
+**Schritt 3: CLAUDE.md prüfen**
+
+Nur wenn `CLAUDE.md` im Repo existiert und dort eine Docs-Referenz (z.B. eine Feature- oder Shared-Tabelle) enthalten ist:
+- Neues Feature, das noch nicht in der Tabelle steht → Zeile ergänzen.
+- Neue Shared-Infrastructure → Zeile ergänzen.
+- Sonst: keine Änderung nötig.
+
+### 6. Dateien stagen
 Stage alle relevanten Dateien **gezielt per Name** (kein `git add -A` oder `git add .`):
 - Starte mit allen geänderten Dateien aus `git status`
 - Stage immer auch CHANGELOG.md mit
+- Falls Docs geändert wurden: Stage diese ebenfalls mit
 - Vermeide versehentliches Stagen von: `.env`, Credential-Dateien, Binaries, `node_modules/`
 
-### 6. Commit erstellen
+### 7. Commit erstellen
 - Falls `$ARGUMENTS` übergeben: verwende exakt diesen Text als Commit-Nachricht
 - Sonst: leite einen prägnanten Satz aus den Änderungen ab (Imperativ, Englisch, max. 1 Satz)
 - **Kein Gitmoji** in der Nachricht — der Post-Commit Hook fügt es automatisch hinzu
@@ -57,10 +85,10 @@ EOF
 )"
 ```
 
-### 7. Push
+### 8. Push
 - Branch hat noch kein Upstream-Tracking → immer: `git push -u origin <branch-name>`
 
-### 8. Bestätigung
+### 9. Bestätigung
 - Führe `git status` aus
 - Gib eine kurze Zusammenfassung aus: Commit-Hash, Nachricht, gepushter Branch
 
