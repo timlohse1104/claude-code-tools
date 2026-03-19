@@ -1,3 +1,9 @@
+---
+name: finish-feature
+description: Schließt den aktuellen Feature-Branch ab nach einem gemergten PR: wechselt zu main, aktualisiert ihn und löscht den Feature-Branch lokal. Auslösen bei Anfragen wie "Feature abschließen", "Branch aufräumen", "PR ist gemergt" oder dem Befehl /finish-feature.
+disable-model-invocation: true
+---
+
 Schließe den aktuellen Feature-Branch ab: Prüfe ob der PR gemergt ist, wechsle zu main, aktualisiere ihn und lösche den Feature-Branch lokal.
 
 ## Schritte

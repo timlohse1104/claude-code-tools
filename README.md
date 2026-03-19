@@ -31,12 +31,16 @@ cp .claude/settings.local.json.example .claude/settings.local.json
 
 ## Contents
 
-### Commands (`commands/`)
+### Skills (`skills/`)
 
-| Command | Description |
-|---|---|
-| `commit-push.md` | Full commit + push workflow with quality checks, CHANGELOG update, and branch creation |
+| Skill | Trigger | Description |
+|---|---|---|
+| `commit-push/` | `/commit-push` | Full commit + push workflow with quality checks, CHANGELOG update, and branch creation |
+| `finish-feature/` | `/finish-feature` | Closes a merged feature branch: switches to main, updates it, deletes the local branch |
+| `get-joke/` | `/get-joke` | Präsentiert 3-5 tagesaktuelle Witze fürs Daily Standup (Flachwitze, Wortwitze, IT-Witze) |
 
 ## Usage in Claude Code
 
-Commands are available via `/` slash shortcuts in Claude Code, e.g. `/commit-push`.
+Skills are available via `/` slash shortcuts in Claude Code, e.g. `/commit-push`.
+
+Skills with `disable-model-invocation: true` must be called explicitly. Others can also be triggered automatically by Claude based on context.

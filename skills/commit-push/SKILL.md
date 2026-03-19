@@ -1,3 +1,9 @@
+---
+name: commit-push
+description: Führt einen vollständigen Commit-und-Push-Workflow durch, inklusive Feature-Branch-Erstellung, Qualitätschecks (Build, Lint, Tests), CHANGELOG- und Docs-Update. Auslösen bei Anfragen wie "committe meine Änderungen", "push das", "erstelle einen Commit" oder dem Befehl /commit-push.
+disable-model-invocation: true
+---
+
 Führe einen vollständigen Commit-und-Push-Workflow durch. Falls `$ARGUMENTS` übergeben wurde, verwende es als Commit-Nachricht. Andernfalls leite eine kurze Nachricht (max. 1 Satz) aus den Änderungen ab.
 
 ## Schritte
