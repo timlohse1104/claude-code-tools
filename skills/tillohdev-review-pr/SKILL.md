@@ -1,3 +1,7 @@
+---
+model: claude-opus-4-6
+---
+
 # /tillohdev-review-pr — Pull Request Review für tilloh.dev
 
 ⚠️  TILLOH.DEV ONLY — Dieser Command ist ausschließlich für das Repository
